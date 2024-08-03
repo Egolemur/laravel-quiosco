@@ -14,7 +14,7 @@ class ProductoController extends Controller
     public function index()
     {
         // Este método devuelve una respuesta JSON con todos los productos.
-        return new ProductoCollection(Producto::where('disponible', 1)->get());
+        return new ProductoCollection(Producto::all());
     }
 
     /**
@@ -38,7 +38,14 @@ class ProductoController extends Controller
      */
     public function update(Request $request, Producto $producto)
     {
-        //
+        // Si el producto está disponible, lo actualiza.
+        if ($producto->disponible == 1) {
+            $producto->disponible = 0;
+            $producto->save();
+            } else {
+                $producto->disponible = 1;
+                $producto->save();
+            }
     }
 
     /**
