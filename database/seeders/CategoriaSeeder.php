@@ -14,9 +14,16 @@ class CategoriaSeeder extends Seeder
      */
     public function run(): void
     {
+        // Borrar datos de la tabla
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        DB::table('categorias')->truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
+
+        // Insertar datos en la tabla
         DB::table('categorias')->insert([
-            'nombre' => 'Café',
-            'icono' => 'cafe',
+            'nombre' => 'Elotes',
+            'icono' => 'elote',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
